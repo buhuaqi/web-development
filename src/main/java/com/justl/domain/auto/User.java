@@ -9,7 +9,6 @@ import java.util.Date;
  */
 public class User implements Serializable{
 
-
     private String objectId;
     private String salt;
     private String listId;
@@ -217,4 +216,5 @@ public class User implements Serializable{
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
 }

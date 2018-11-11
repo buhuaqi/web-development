@@ -7,6 +7,7 @@ import com.justl.utils.Constants;
 import com.justl.utils.WebApiUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,5 +47,13 @@ public class LoginController {
             return WebApiUtils.getResultInfo(null, e.getMessage(), 401);
         }
         return new ResponseData<>(login);
+    }
+
+    /**
+     * 注销
+     */
+    @GetMapping("/logout")
+    public ResponseData<String> logout(HttpSession session) {
+        return loginService.logOut(session);
     }
 }

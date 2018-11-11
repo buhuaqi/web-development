@@ -97,10 +97,13 @@ public class DbClient {
         return avObjects;
     }
 
+    /**
+     * 登陆
+     */
     public AVUser login(String username, String password){
         AVUser avUser = null;
         try {
-             avUser = AVUser.logIn(username, password);
+            avUser = AVUser.logIn(username, password);
         } catch (AVException e) {
             e.printStackTrace();
         }
@@ -110,8 +113,8 @@ public class DbClient {
     public static void main(String[] args) throws AVException, UnsupportedEncodingException, NoSuchAlgorithmException {
         DbClient dbClient = new DbClient();
 
-
-        AVUser avUser = AVUser.logIn("123456789", "bhq");
+        dbClient.insertCQL("");
+//        AVUser avUser = AVUser.logIn("123456789", "bhq");
     }
 
 
