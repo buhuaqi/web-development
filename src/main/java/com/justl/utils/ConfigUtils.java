@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * 配置文件读取
+ *
  * @author buhuaqi
  * @date 2018-10-29 11:16
  */

@@ -1,6 +1,8 @@
 package com.justl.utils;
 
 /**
+ * 常量
+ *
  * @author buhuaqi
  * @date 2018-10-29 10:20
  */

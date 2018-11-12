@@ -7,9 +7,11 @@ import java.util.Date;
  * @author buhuaqi
  * @date 2018-10-29 10:38
  */
-public class User implements Serializable{
+public class User implements Serializable {
 
+    //动态id，唯一
     private String objectId;
+    //盐（盐值加密）
     private String salt;
     private String listId;
     private String property;
@@ -19,19 +21,148 @@ public class User implements Serializable{
     private String brith;
     private String password;
     private String assumpsitId;
+    //文件资源名
     private String portrait;
     private String vip;
     private String username;
     private String sex;
+
     private String emailVerified;
+    //手机号
     private String mobilePhoneNumber;
     private String name;
     private String emotional;
     private String coin;
+    //用户动态
     private String authData;
     private String mobilePhoneVerified;
     private Date createdAt;
     private Date updateAt;
+    private String constellation;
+    private String admin;
+    private String giftNum;
+    private boolean buyer;
+    //给别人点赞数
+    private Integer giveThumbsupNum;
+    //被赞数
+    private Integer thumbsupNum;
+    private String weight;
+    private String height;
+    private String age;
+    //iOATH号
+    private Integer iOATHNum;
+    //节操分数
+    private Integer CScore;
+
+    public Integer getiOATHNum() {
+        return iOATHNum;
+    }
+
+    public void setiOATHNum(Integer iOATHNum) {
+        this.iOATHNum = iOATHNum;
+    }
+
+    public Integer getCScore() {
+        return CScore;
+    }
+
+    public void setCScore(Integer CScore) {
+        this.CScore = CScore;
+    }
+
+    public Integer getReportNum() {
+        return ReportNum;
+    }
+
+    public void setReportNum(Integer reportNum) {
+        ReportNum = reportNum;
+    }
+
+    //被举报次数
+    private Integer ReportNum;
+
+    //是否为推广员
+    private boolean promoters;
+
+    public String getConstellation() {
+        return constellation;
+    }
+
+    public void setConstellation(String constellation) {
+        this.constellation = constellation;
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+
+    public String getGiftNum() {
+        return giftNum;
+    }
+
+    public void setGiftNum(String giftNum) {
+        this.giftNum = giftNum;
+    }
+
+    public boolean isPromoters() {
+        return promoters;
+    }
+
+    public void setPromoters(boolean promoters) {
+        this.promoters = promoters;
+    }
+
+    public boolean isBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(boolean buyer) {
+        this.buyer = buyer;
+    }
+
+    public Integer getGiveThumbsupNum() {
+        return giveThumbsupNum;
+    }
+
+    public void setGiveThumbsupNum(Integer giveThumbsupNum) {
+        this.giveThumbsupNum = giveThumbsupNum;
+    }
+
+    public Integer getThumbsupNum() {
+        return thumbsupNum;
+    }
+
+    public void setThumbsupNum(Integer thumbsupNum) {
+        this.thumbsupNum = thumbsupNum;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getObjectId() {
         return objectId;

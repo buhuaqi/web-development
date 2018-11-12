@@ -1,6 +1,8 @@
 package com.justl.utils;
 
 /**
+ * 异常信息转换(转换为String)
+ *
  * @author buhuaqi
  * @date 2018-10-29 11:18
  */

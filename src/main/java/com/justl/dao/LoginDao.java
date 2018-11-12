@@ -18,14 +18,17 @@ public class LoginDao {
     private static Logger logger = LoggerFactory.getLogger(LoginDao.class);
     private boolean flag;
 
+    /**
+     * 验证用户是否登陆
+     */
     public AVUser queryCQL(String tbName, User user) {
 
         DbClient dbClient = new DbClient();
         AVUser login = dbClient.login(user.getUsername(), user.getPassword());
 
-        if (login!=null){
+        if (login != null) {
             return login;
-        }else {
+        } else {
             logger.error("用户名或密码错误 user{}");
             throw new SysPrivilegeException("用户名或密码错误");
         }
