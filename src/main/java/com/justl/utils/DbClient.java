@@ -18,15 +18,13 @@ public class DbClient {
 
     private static final Logger logger = LoggerFactory.getLogger(DbClient.class);
 
-    public DbClient() {
-        dbInit();
-    }
 
 
     /**
+     * 11-15 ly修改 初始化参数移动到静态块中
      * 初始化数据库相关参数
      */
-    private void dbInit() {
+    static {
         Properties props = ConfigUtils.getProps("conf.properties");
         AVOSCloud.initialize(props.getProperty("AppId"), props.getProperty("AppKey"), props.getProperty("MasterKey"));
         AVOSCloud.setDebugLogEnabled(true);
@@ -75,6 +73,35 @@ public class DbClient {
         return avObject;
     }
 
+    /**
+     * 根据条件查询用户列表 普通用户查询已经完成，优质用户查询正在写
+     */
+    public ListUtils select(String TbName,Map<String,Object> map) {
+        List<AVObject> avObjects = null;
+        int total=0;
+        AVQuery<AVObject> avQuery = null;
+
+        if(map.get("vip")=="true"&&map.get("promoters")=="true"&&map.get("buyer")=="true"){
+            avQuery=new AVQuery<>(TbName);
+//            avQuery.where
+//            avQuery.whereGreaterThan("promoters","true");
+//            avQuery.whereGreaterThan("buyer","true");
+        }else{
+            avQuery=new AVQuery<>(TbName);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                System.out.println(entry.getKey()+"::"+ entry.getValue());
+                avQuery.whereEqualTo(entry.getKey(), entry.getValue());
+            }
+        }
+        try {
+            avObjects = avQuery.find();
+            total = avQuery.count();
+           } catch (AVException e) {
+            e.printStackTrace();
+        }
+
+        return new ListUtils(total,avObjects);
+    }
     /**
      * 查询语句
      *

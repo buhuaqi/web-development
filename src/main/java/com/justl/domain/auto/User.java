@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 注：字段名称必须与数据库完全一致
  * @author buhuaqi
  * @date 2018-10-29 10:38
  */
@@ -23,10 +24,10 @@ public class User implements Serializable {
     private String assumpsitId;
     //文件资源名
     private String portrait;
-    private String vip;
+    private boolean VIP;
+    private String Constellation;
     private String username;
     private String sex;
-
     private String emailVerified;
     //手机号
     private String mobilePhoneNumber;
@@ -41,7 +42,7 @@ public class User implements Serializable {
     private String constellation;
     private String admin;
     private String giftNum;
-    private boolean buyer;
+    private boolean Buyer;
     //给别人点赞数
     private Integer giveThumbsupNum;
     //被赞数
@@ -82,7 +83,7 @@ public class User implements Serializable {
     private Integer ReportNum;
 
     //是否为推广员
-    private boolean promoters;
+    private boolean Promoters;
 
     public String getConstellation() {
         return constellation;
@@ -109,19 +110,19 @@ public class User implements Serializable {
     }
 
     public boolean isPromoters() {
-        return promoters;
+        return Promoters;
     }
 
     public void setPromoters(boolean promoters) {
-        this.promoters = promoters;
+        this.Promoters = promoters;
     }
 
     public boolean isBuyer() {
-        return buyer;
+        return Buyer;
     }
 
     public void setBuyer(boolean buyer) {
-        this.buyer = buyer;
+        this.Buyer = buyer;
     }
 
     public Integer getGiveThumbsupNum() {
@@ -252,12 +253,12 @@ public class User implements Serializable {
         this.portrait = portrait;
     }
 
-    public String getVip() {
-        return vip;
+    public boolean getVip() {
+        return VIP;
     }
 
-    public void setVip(String vip) {
-        this.vip = vip;
+    public void setVip(boolean VIP) {
+        this.VIP = VIP;
     }
 
     public String getUsername() {
