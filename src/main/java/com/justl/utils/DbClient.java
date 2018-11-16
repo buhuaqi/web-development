@@ -4,6 +4,7 @@ import com.avos.avoscloud.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -74,32 +75,43 @@ public class DbClient {
     }
 
     /**
-     * 根据条件查询用户列表 普通用户查询已经完成，优质用户查询正在写
+     * 根据条件查询用户列表 优质用户查询完成
      */
     public ListUtils select(String TbName,Map<String,Object> map) {
-        List<AVObject> avObjects = null;
+        List avObjects = null;
         int total=0;
         AVQuery<AVObject> avQuery = null;
+         if((boolean) map.get("VIP")==true||(boolean)map.get("Promoters")==true||(boolean) map.get("Buyer")==true){
+//
+            StringBuilder cql=new StringBuilder("select * from "+TbName+" where ( VIP = true or Promoters =true or Buyer =true ) ") ;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if((!entry.getKey().equals("VIP"))&&(!entry.getKey().equals("Buyer"))&&(!entry.getKey().equals("Promoters"))){
+                    cql.append(" and "+entry.getKey()+" = "+"'"+entry.getValue()+"'");
+                }
+                System.out.println((!entry.getKey().equals("VIP"))||(!entry.getKey().equals("Buyer"))||(!entry.getKey().equals("Promoters")));
+                System.out.println(entry.getKey());
+            }
+            System.out.println(cql);
+            try {
+               AVCloudQueryResult avCloudQueryResult = AVQuery.doCloudQuery(cql.toString());
+               avObjects = avCloudQueryResult.getResults();
+               total= avCloudQueryResult.getCount();
+           } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        if(map.get("vip")=="true"&&map.get("promoters")=="true"&&map.get("buyer")=="true"){
-            avQuery=new AVQuery<>(TbName);
-//            avQuery.where
-//            avQuery.whereGreaterThan("promoters","true");
-//            avQuery.whereGreaterThan("buyer","true");
         }else{
             avQuery=new AVQuery<>(TbName);
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                System.out.println(entry.getKey()+"::"+ entry.getValue());
-                avQuery.whereEqualTo(entry.getKey(), entry.getValue());
+                 avQuery.whereEqualTo(entry.getKey(), entry.getValue());
+            }
+            try {
+                avObjects = avQuery.find();
+                total = avQuery.count();
+            } catch (AVException e) {
+                e.printStackTrace();
             }
         }
-        try {
-            avObjects = avQuery.find();
-            total = avQuery.count();
-           } catch (AVException e) {
-            e.printStackTrace();
-        }
-
         return new ListUtils(total,avObjects);
     }
     /**
