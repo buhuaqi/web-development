@@ -17,9 +17,21 @@ public class UserServiceImp implements UserService {
     private UserDao userDao;
 
     @Override
-    public ListUtils query(Map<String,Object> map) {
-        ListUtils query = userDao.query("_User",map);
+    public List queryUser(String TbName,Map<String,Object> map) {
+        List query = userDao.queryUser(TbName,map);
         return query;
+    }
+
+    @Override
+    public List queryGoodUser(String TbName,Map<String, Object> map) {
+        List query = userDao.queryGoodUser(TbName,map);
+        return query;
+    }
+
+    @Override
+    public List selectCQL(String TbName, Map<String, Object> map) {
+        List list=userDao.selectCQL(TbName, map);
+        return list;
     }
 
 

@@ -27,7 +27,7 @@ public class User implements Serializable {
     private boolean VIP;
     private String Constellation;
     private String username;
-    private String sex;
+    private String Sex;
     private String emailVerified;
     //手机号
     private String mobilePhoneNumber;
@@ -270,11 +270,11 @@ public class User implements Serializable {
     }
 
     public String getSex() {
-        return sex;
+        return Sex;
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.Sex = sex;
     }
 
     public String getEmailVerified() {

@@ -8,5 +8,9 @@ import java.util.Map;
 
 public interface UserService {
 
-    ListUtils query(Map<String,Object> map);
+    List queryUser(String TbName,Map<String,Object> map);
+
+    List queryGoodUser(String TbName,Map<String,Object> map);
+
+    List selectCQL(String TbName, Map<String, Object> map);
 }

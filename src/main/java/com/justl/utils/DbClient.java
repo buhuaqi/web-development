@@ -1,13 +1,11 @@
 package com.justl.utils;
 
 import com.avos.avoscloud.*;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * 数据库链接客户端
@@ -75,44 +73,22 @@ public class DbClient {
     }
 
     /**
-     * 根据条件查询用户列表 优质用户查询完成
+     * 优质客户查询
      */
-    public ListUtils select(String TbName,Map<String,Object> map) {
-        List avObjects = null;
-        int total=0;
-        AVQuery<AVObject> avQuery = null;
-         if((boolean) map.get("VIP")==true||(boolean)map.get("Promoters")==true||(boolean) map.get("Buyer")==true){
-//
-            StringBuilder cql=new StringBuilder("select * from "+TbName+" where ( VIP = true or Promoters =true or Buyer =true ) ") ;
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                if((!entry.getKey().equals("VIP"))&&(!entry.getKey().equals("Buyer"))&&(!entry.getKey().equals("Promoters"))){
-                    cql.append(" and "+entry.getKey()+" = "+"'"+entry.getValue()+"'");
-                }
-                System.out.println((!entry.getKey().equals("VIP"))||(!entry.getKey().equals("Buyer"))||(!entry.getKey().equals("Promoters")));
-                System.out.println(entry.getKey());
-            }
-            System.out.println(cql);
-            try {
-               AVCloudQueryResult avCloudQueryResult = AVQuery.doCloudQuery(cql.toString());
-               avObjects = avCloudQueryResult.getResults();
-               total= avCloudQueryResult.getCount();
-           } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }else{
-            avQuery=new AVQuery<>(TbName);
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                 avQuery.whereEqualTo(entry.getKey(), entry.getValue());
-            }
-            try {
-                avObjects = avQuery.find();
-                total = avQuery.count();
-            } catch (AVException e) {
-                e.printStackTrace();
-            }
+    public List<? extends AVObject> queryGoodUser(String TbName, Map<String, Object> map){
+        List<? extends AVObject> list  = null;
+        StringBuilder cql=new StringBuilder("select * from "+TbName+" where ( VIP = true or Promoters = true or Buyer =true ) ");
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+           cql.append(" and " + entry.getKey() +" = " +"'"+ entry.getValue()+"'");
         }
-        return new ListUtils(total,avObjects);
+        try {
+            System.out.println(cql);
+            AVCloudQueryResult avCloudQueryResult = AVQuery.doCloudQuery(cql.toString());
+            list  =avCloudQueryResult.getResults();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         return list;
     }
     /**
      * 查询语句
