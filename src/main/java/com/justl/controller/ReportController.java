@@ -1,10 +1,11 @@
 package com.justl.controller;
 
-import com.justl.domain.auto.User;
+import com.justl.domain.auto.ReportDomain;
 import com.justl.domain.response.ResponseData;
 import com.justl.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,21 +22,34 @@ public class ReportController {
     ReportService reportService;
 
     /**
-     * 查询被举报用户信息
+     * 查询动态举报用户信息
      */
-    @GetMapping("/info")
-    public ResponseData<Map<String, Object>> dynamicReport(String objectId) {
-        User user = new User();
-        user.setObjectId(objectId);
-        Map map = reportService.dynamicReport(user);
-        return new ResponseData<>(map);
+    @PostMapping("/dyinfo")
+    public ResponseData<Map<String, Object>> dynamicReportInfo(@RequestBody ReportDomain reportDomain) {
+        return new ResponseData<>(reportService.dynamicReportQuery(reportDomain));
     }
 
-//    /**
-//     * 查询被举报用户节操分数，被举报次数
-//     */
-//    public ResponseData<> reportDetails(@RequestBody User user) {
-//
-//        return null;
-//    }
+    /**
+     * 动态举报逻辑
+     */
+    @PostMapping("/dynamic")
+    public ResponseData<Map<String, Object>> dynamicReport(@RequestBody ReportDomain reportDomain) {
+        return new ResponseData<>(reportService.dynamicReport(reportDomain));
+    }
+
+    /**
+     * 查询聊天举报用户信息
+     */
+    @PostMapping("/chatinfo")
+    public ResponseData<Map<String, Object>> chatReportInfo(@RequestBody ReportDomain reportDomain) {
+        return new ResponseData<>(reportService.chatReportQuery(reportDomain));
+    }
+
+    /**
+     * 聊天举报逻辑
+     */
+    @PostMapping("/chat")
+    public ResponseData<Map<String, Object>> chatReport(@RequestBody ReportDomain reportDomain) {
+        return new ResponseData<>(reportService.chatReport(reportDomain));
+    }
 }

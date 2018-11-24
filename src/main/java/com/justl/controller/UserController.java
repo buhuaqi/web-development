@@ -6,13 +6,13 @@ import com.justl.domain.auto.User;
 import com.justl.domain.response.ResponseData;
 import com.justl.service.UserService;
 import com.justl.utils.ListUtils;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import org.apache.http.protocol.ResponseDate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
